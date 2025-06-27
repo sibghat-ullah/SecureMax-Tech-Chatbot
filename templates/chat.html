@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>IT Services Chatbot</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #f1f1f1;
+    }
+
+    .chat-container {
+      width: 500px;
+      max-height: 90vh;
+      background: #1e272e;
+      border-radius: 15px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+    }
+
+    .chat-header {
+      background: #0abde3;
+      padding: 20px;
+      text-align: center;
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: white;
+    }
+
+    .chat-box {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      background-color: #2f3542;
+    }
+
+    .message {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .message.user {
+      flex-direction: row-reverse;
+    }
+
+    .message .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: larger;
+    }
+
+    .message .text {
+      max-width: 75%;
+      background: #57606f;
+      padding: 12px 16px;
+      border-radius: 12px;
+    }
+
+    .message.user .text {
+      background: #1e90ff;
+      color: #fff;
+      font-size: larger;
+    }
+
+    .chat-form {
+      display: flex;
+      padding: 15px;
+      background-color: #1e272e;
+      border-top: 1px solid #3c3c3c;
+    }
+
+    .chat-form input {
+      flex: 1;
+      padding: 10px 15px;
+      border-radius: 25px;
+      border: none;
+      outline: none;
+      background: #ced6e0;
+      color: #2f3542;
+    }
+
+    .chat-form button {
+      margin-left: 10px;
+      padding: 10px 20px;
+      border-radius: 25px;
+      background-color: #0abde3;
+      border: none;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .chat-form button:hover {
+      background-color: #1e90ff;
+    }
+
+    .loader {
+      font-style: italic;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+<div class="chat-container">
+  <div class="chat-header">💻 SecureMaxTech | Demo by Sybghat</div>
+<!-- just related to secure Max Tech -->
+<!--  Data -->
+<!--  Question -->
+  <!-- Data Flow diagram -->
+  <div class="chat-box" id="chat-box">
+    {% if user_input %}
+      <div class="message user">
+        <img class="avatar" src="https://i.pravatar.cc/40?img=7" alt="User">
+        <div class="text">{{ user_input }}</div>
+      </div>
+      <div class="message bot">
+        <img class="avatar" src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" alt="Bot">
+        <div class="text">{{ response|safe }}</div>
+      </div>
+    {% else %}
+      <div style="text-align:center; font-size: 14px; color:#aaa;">
+        Ask any question related to IT services and solutions 🤖
+      </div>
+    {% endif %}
+    {% if not response and user_input %}
+      <div class="message bot">
+        <img class="avatar" src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" alt="Bot">
+        <div class="text loader">Thinking... please wait ⏳</div>
+      </div>
+    {% endif %}
+  </div>
+
+  <form class="chat-form" method="get">
+    <input type="text" name="message" placeholder="How can we help you today?" required>
+    <button type="submit">Send</button>
+  </form>
+</div>
+</body>
+</html>
